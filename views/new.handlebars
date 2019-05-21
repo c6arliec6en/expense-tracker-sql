@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <form action="/records/new" method="POST">
+    <div class="row justify-content-center">
+      <div class="card card-body col-md-5">
+        <h2>＊為必填欄位</h2>
+        {{!-- {{> messages}} --}}
+        <div class="mt-3">
+          <label for="name">*名稱:</label>
+          <input type="text" name="name" id="name" placeholder="項目名稱" class="form-control">
+        </div>
+
+        <div class="mt-3">
+          <label for="date">*日期:</label>
+          <input type="date" id="date" name="date" value='{{{date}}}' min="2018-01-01" max="" class="form-control">
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="category">*類別:</label>
+          <select class="form-control" id="category" name="category">
+            <option value="home">家居物業</option>
+            <option value="travel">交通出行</option>
+            <option value="leisure">休閒娛樂</option>
+            <option value="food">餐飲食品</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+
+        <div class="">
+          <label for="amount">*金額:</label>
+          <input type="text" name="amount" id="amount" placeholder="金額" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-5">確認送出</button>
+      </div>
+    </div>
+
+
+  </form>
+</div>

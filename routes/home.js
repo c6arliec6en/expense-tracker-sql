@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
-const Record = db.Record
+const Record = db.record
 const authenticated = require('../config/auth')
 
 
 router.get('/', authenticated, (req, res) => {
-  res.render('index')
+  Record.findAll({ where: { UserId: req.user.id } }).then(records => {
+    res.render('index', { records: records })
+  })
 })
 
 
