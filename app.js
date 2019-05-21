@@ -36,6 +36,7 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/', express.static('public'))
 
 app.set('view engine', 'handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
