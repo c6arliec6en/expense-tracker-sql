@@ -1,0 +1,82 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-10 card card-body">
+      <div class="row justify-content-center">
+
+        <form action="/filter" data-filter="form" class="">
+          <select class="choose" id="category" name="category" data-filter="choose">
+            <option value="" {{#compare category '==' ''}}selected{{/compare}}>所有類別</option>
+            <option value="home" {{#compare category '==' 'home'}}selected{{/compare}}>家居物業</option>
+            <option value="travel" {{#compare category '==' 'travel'}}selected{{/compare}}>交通出行</option>
+            <option value="leisure" {{#compare category '==' 'leisure'}}selected{{/compare}}>休閒娛樂</option>
+            <option value="food" {{#compare category '==' 'food'}}selected{{/compare}}>餐飲食品</option>
+            <option value="other" {{#compare category '==' 'other'}}selected{{/compare}}>其他</option>
+          </select>
+
+          <select class="choose" id="month" name="month" data-filter="choose">
+            <option value="" {{#compare month '==' ''}}selected{{/compare}}>所有月份</option>
+            <option value="01" {{#compare month '==' '01'}}selected{{/compare}}>一月</option>
+            <option value="02" {{#compare month '==' '02'}}selected{{/compare}}>二月</option>
+            <option value="03" {{#compare month '==' '03'}}selected{{/compare}}>三月</option>
+            <option value="04" {{#compare month '==' '04'}}selected{{/compare}}>四月</option>
+            <option value="05" {{#compare month '==' '05'}}selected{{/compare}}>五月</option>
+            <option value="06" {{#compare month '==' '06'}}selected{{/compare}}>六月</option>
+            <option value="07" {{#compare month '==' '07'}}selected{{/compare}}>七月</option>
+            <option value="08" {{#compare month '==' '08'}}selected{{/compare}}>八月</option>
+            <option value="09" {{#compare month '==' '09'}}selected{{/compare}}>九月</option>
+            <option value="10" {{#compare month '==' '10'}}selected{{/compare}}>十月</option>
+            <option value="11" {{#compare month '==' '11'}}selected{{/compare}}>十一月</option>
+            <option value="12" {{#compare month '==' '12'}}selected{{/compare}}>十二月</option>
+          </select>
+
+        </form>
+      </div>
+      <div class="row justify-content-center align-items-center mt-3">
+        <h5 class="mr-5 ">總金額:</h5>
+        <h1 data-amount="sum" class="sum">0</h1>
+        <p>$</p>
+      </div>
+
+      {{#each records}}
+      <div class="row justify-content-center ">
+        <div class="record-style">
+          <div class="row justify-content-around align-items-center">
+            <div class="row justify-content-between col-8">
+              <div class="row col-md-12">
+                <div class="align-self-center col-md-5">
+                  <p class="category m-auto">{{{this.category}}}</p>
+                </div>
+                
+                <div class="ml-3 align-self-center">
+                  <p class="m-auto">{{{this.name}}}</p>
+                  <p class="m-auto">{{{this.date}}}</p>
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <p data-amount="expense" class="m-auto fa-1x record-amount">{{{this.amount}}}</p>
+                <p class="m-auto record-amount">$</p>
+              </div>
+
+            </div>
+            <div class="row btn-list">
+              <a href="/records/edit/{{{this._id}}}" class="btn"><i class="fas fa-pen color fa-2x"></i></a>
+              <form action="/records/delete/{{{this.id}}}" method="POST">
+                <button type="submit" class="btn"><i class="fas fa-trash fa-2x danger"></i></button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+
+</div>
+
+<script <script src="/javascripts/sum.js"></script>
+<script src="/javascripts/img.js"></script>
+<script src="/javascripts/onclick.js"></script>
