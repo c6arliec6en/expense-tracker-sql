@@ -9,8 +9,7 @@ const User = db.User
 module.exports = passport => {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-      User.findOne({ where: { email: email } }, (err, user) => {
-        if (err) console.log('login error')
+      User.findOne({ where: { email: email } }).then(user => {
         if (!user) {
           return done(null, false, { message: 'That email is not registered' })
         }
@@ -22,6 +21,8 @@ module.exports = passport => {
             return done(null, false, { message: 'Email and Password incorrect' })
           }
         })
+      }).catch(err => {
+        console.log(err)
       })
     }
     ))
@@ -63,8 +64,10 @@ module.exports = passport => {
     done(null, user.id)
   })
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      done(err, user)
+    User.findByPk(id).then(user => {
+      done(null, user)
+    }).catch(err => {
+      console.log(err)
     })
   })
 }

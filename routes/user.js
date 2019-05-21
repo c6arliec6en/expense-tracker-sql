@@ -13,7 +13,7 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) { console.log(err) }
     if (!user) {
-      req.flash('warning_msg', info.message)
+      // req.flash('warning_msg', info.message)
       return res.redirect('/users/login')
     }
     req.logIn(user, (err) => {
