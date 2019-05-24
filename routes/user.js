@@ -13,7 +13,7 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) { console.log(err) }
     if (!user) {
-      // req.flash('warning_msg', info.message)
+      req.flash('warning_msg', info.message)
       return res.redirect('/users/login')
     }
     req.logIn(user, (err) => {
@@ -32,8 +32,14 @@ router.post('/register', (req, res) => {
 
   const errors = []
 
+
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: 'All field are required' })
+  }
+
   if (password !== confirmPassword) {
     errors.push({ message: 'Password confirm failure' })
+    res.render('register', { name, email, password, confirmPassword, errors })
   }
 
   User.findOne({ where: { email: email } }).then(user => {
@@ -64,6 +70,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
+  req.flash('success_msg', 'Success logout')
   req.logout()
   return res.redirect('/users/login')
 })
