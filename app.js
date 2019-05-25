@@ -51,6 +51,6 @@ app.use('/auth', require('./routes/auth'))
 app.use('/filter', require('./routes/filter'))
 
 app.listen(port, () => {
-  db.sequelize.sync()
+  // db.sequelize.sync()
   console.log('Port 3000 Running')
 })
